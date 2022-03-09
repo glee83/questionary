@@ -1,8 +1,39 @@
-
-<app-navbar></app-navbar>
-
 <div class="welcome">
-    <p>welcome home!</p>
-</div>
 
-<app-footer></app-footer>
+    <div class="banner">
+        <app-navbar></app-navbar>
+        <h3 class="quest-heading">How much does an application cost?</h3>
+    </div>
+
+    <div class="card">
+
+        <div class="card-head">
+            <p class="quest-out-of">Question {{qnProgress + 1}} of 10</p>
+            <div class="progress">
+                <span class="determinate" [style.width.%]="(qnProgress+1)*10"> bar </span>
+            </div>
+            <!-- <div class="progress">
+                <div class="determinate" style="width: 70%"></div>
+            </div> -->
+        </div>
+
+        <h3 class="question"> {{ questions[qnProgress].text }} </h3>
+
+        <div class="card-body" *ngFor="let quest of questions[qnProgress].options; let i = index;">
+            <div class="options" (click)="Answer(questions[qnProgress].id, i)" >
+                <label for="android" class="options">
+                    <input type="radio" value="Andriod" name="mobile-app" id="">
+                    {{quest.text}}
+                </label>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button *ngIf="qnProgress !=0 " (click)="previous(questions[qnProgress].id)">previous</button>
+            <button (click)="next(questions[qnProgress].id)">next</button>
+        </div>
+
+    </div>
+
+    <app-footer></app-footer>
+</div>

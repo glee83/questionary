@@ -7,6 +7,9 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { QuestionsComponent } from './components/questions/questions.component';
 import { NavbarComponent } from './components/shareComponents/navbar/navbar.component';
 import { FooterComponent } from './components/shareComponents/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { FooterComponent } from './components/shareComponents/footer/footer.comp
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
