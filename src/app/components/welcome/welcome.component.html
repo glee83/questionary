@@ -2,37 +2,92 @@
 
     <div class="banner">
         <app-navbar></app-navbar>
-        <!-- <h3 class="quest-heading">How much does an application cost?</h3> -->
+        <h3 class="quest-heading">How much does an application cost ?</h3>
     </div>
 
     <div class="card">
+        <div class="content">
+            <div class="first-content">
+                <p class="quest-out-of">Question {{qnProgress + 1}} of {{questions.length }} </p>
+                <div class="card-head">
+                    <h3 class="question"> {{ questions[qnProgress]['text']}} </h3>
+                    <div class="progress">
+                        <span class="determinate" [style.width.%]="(qnProgress+1)*10"> </span>
+                    </div>
+                </div>
+    
+                <!-- <div class="card-body" *ngFor="let quest of questions[qnProgress].options; let i = index;">
         
-        <p class="quest-out-of">Question {{qnProgress + 1}} of 10</p>
-        <div class="card-head">
-            <h3 class="question"> {{ questions[qnProgress].text }} </h3>
-            <div class="progress">
-                <span class="determinate" [style.width.%]="(qnProgress+1)*10"> </span>
+                    <div *ngIf="quest.text != null" class="options" (click)="Answer(quest.text, i)">
+                        <label>
+                            <input class="with-gap" name="group1" type="radio" />
+                            <span>{{quest.text}}</span>
+                        </label>
+                    </div>
+                </div> -->
+            </div>
+            <div class="second-content">
+
+                <div class="card-body">
+        
+                    <div class="row ">
+                        <p class="center-align  ">Thank you for using our cost simulation. Please fill the form below to see the price.</p>
+                        <form class="col s12" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="email" type="email" name="email" class="validate" formControlName="email">
+                                    <label for="email">Email</label>
+                                    <div class="danger" *ngIf="(myForm.controls['email'].touched || myForm.controls['email'].dirty) && myForm.controls['email'].invalid ">
+                                        Please provide a email.
+                                    </div>
+                                </div>
+        
+                                <div class="input-field col s6">
+                                    <input id="phone" type="number" name="phone" class="validate" formControlName="phone">
+                                    <label for="phone">Phone</label>
+                                    <div class="danger" *ngIf="(myForm.controls['phone'].touched || myForm.controls['phone'].dirty) && myForm.controls['phone'].invalid">
+                                        Enter number
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="compName" type="text" name="compName" class="validate" formControlName="compName" >
+                                    <label for="compName">Company name </label>
+                                    <div class="danger" *ngIf="(myForm.controls['compName'].touched || myForm.controls['phone'].dirty) && myForm.controls['phone'].invalid">
+                                        Enter company name
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" [disabled]="myForm.invalid"  class="btn waves-effect waves-light right-align" type="submit" name="action">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+            
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
+        
 
-        <div class="card-body" *ngFor="let quest of questions[qnProgress].options; let i = index;">
-            <div class="options" (click)="Answer(questions[qnProgress].id, i)" >
-                <label for="android" class="options">
-                    <input type="radio" value="Andriod" name="mobile-app" id="">
-                    {{quest.text}}
-                    
-                    <!-- <span>{{quest.text}}</span> -->
-                </label>
-            </div>
+        <div *ngIf="qnProgress == 10" class="card-body">
         </div>
-
+        
         <div class="footer">
             <button *ngIf="qnProgress !=0 " (click)="previous(questions[qnProgress].id)">
                 <i class="material-icons">chevron_left</i>
-                <span class="preview-btn">previous</span>
+                <span class="preview-btn">previous</span> 
+            </button>
+
+            <!-- <button *ngIf="qnProgress == 9"(click)="previous(questions[qnProgress].id)">
+                <span class="preview-btn">Submit</span>
+                <i class="material-icons">chevron_right</i>
                 
             </button>
+             -->
+
             <!-- <button class="next-btn" (click)="next(questions[qnProgress].id)">next</button> -->
         </div>
 
